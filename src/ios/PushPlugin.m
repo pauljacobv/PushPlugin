@@ -215,12 +215,19 @@
 
         [jsonStr appendString:@"}"];
 
+        [jsonStr appendString:@"}"];
+ 
+ 
+ 
         NSLog(@"Msg: %@", jsonStr);
+		
+		NSLog(@"selfcallback: %@", self.callback);
+		
+		NSString *javascriptString = [NSString stringWithFormat:@"notificationReceived('%@')", currentState];
 
-        NSString * jsCallBack = [NSString stringWithFormat:@"%@(%@);", self.callback, jsonStr];
-        [self.webView stringByEvaluatingJavaScriptFromString:jsCallBack];
-
-        self.notificationMessage = nil;
+		[self.webView stringByEvaluatingJavaScriptFromString:javascriptString];
+ 
+		self.notificationMessage = nil;
     }
 }
 
